@@ -1,0 +1,18 @@
+<% provide(:title, 'Message') %>
+<h1> Chat out your heart! </h1>
+
+<ul class="users">
+  <% @old_messages.each do |message| %>
+    <li> 
+      <%=message.content%>, <%=message.created_at%>
+    </li>
+  <% end %>
+</ul>
+
+<%= form_for @message, url: {action: "create"}  do |m| %>
+  <%= m.label :content %>
+  <%= m.text_field :content, class: 'form-control' %>
+  <%= m.submit "Send", class: "btn btn-primary" %>
+
+<% end %>
+
