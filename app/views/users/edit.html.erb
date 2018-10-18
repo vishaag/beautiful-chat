@@ -20,6 +20,7 @@
 
       <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>
-
+    <%= link_to "DELETE ACCOUNT", @user, method: :delete, class: "btn btn-danger btn-block btn-margin",
+                                  data: { confirm: "You sure?" } %>
   </div>
 </div>
