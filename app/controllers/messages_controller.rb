@@ -13,6 +13,7 @@ class MessagesController < ApplicationController
     @message.sender_id = session[:user_id]
     @message.receiver_id = params[:id]
     @message.save
+    redirect_to controller: 'messages', id: params[:id]
   end
 
   private
