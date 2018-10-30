@@ -1,0 +1,11 @@
+<% provide(:title, 'All Groups') %>
+<h1>Groups</h1>
+
+<ul class="users">
+  <% @groups.each do |group|  %>
+    <li>
+      <%= link_to group.name, 'groups/'+group.id.to_s %>
+      <%= "  |  " + group.group_type.to_s %>
+    </li>
+  <% end %>
+</ul>
