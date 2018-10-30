@@ -1,7 +1,18 @@
+<% provide(:title, 'Group Message') %>
+<h1> Group Chat </h1>
+
 <ul class="users">
   <% @users.each do |user| %>
-    <li>
-      <%=user.id%>
+    <li> 
+      <%=user.user_id%>
     </li>
   <% end %>
 </ul>
+
+<%= form_for @message, url: {action: "create"}  do |m| %>
+  <%= m.label :content %>
+  <%= m.text_area :content, class: 'form-control', autocomplete: "off" %>
+  <%= m.submit "Send", class: "btn btn-primary" %>
+
+<% end %>
+

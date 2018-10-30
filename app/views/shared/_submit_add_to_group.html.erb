@@ -1,0 +1,4 @@
+<%= form_for [@group, GroupUser.new] do |m| %>
+<%= m.hidden_field(:user_id, value: user.id) %>
+<%= m.submit "Add", class: "btn btn-primary" %>
+<% end %>

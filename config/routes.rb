@@ -7,11 +7,22 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   
-  post '/messages/:id', to:'messages#create'
-  get '/messages/:id', to:'messages#index'
+  #post '/messages/:id', to:'messages#create'
+  #get '/messages/:id', to:'messages#index'
 
   resources :users do
-    resources :messages, only: [:create, :index]
+    scope module: 'users' do
+      resources :messages, only: [:create, :index]
+    end
   end
-  resources :groups
+
+  resources :groups do
+    scope module: 'groups' do
+      resources :messages, only: [:create, :index]
+    end
+
+    resources :group_users, only: [:create]
+  end
+
+
 end
