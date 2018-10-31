@@ -1,5 +1,5 @@
-<% provide(:title, 'Message') %>
-<h1> Chat out your heart! </h1>
+<% provide(:title, 'Group Chat') %>
+<h1> Group Chat </h1>
 
 <div>
   <% @old_messages.each do |message| %>
@@ -14,7 +14,7 @@
   <% end %>
 </div>
 
-<%= form_for [@recipient, @message], url: {action: "create"}  do |m| %>
+<%= form_for [@group, @message], url: {action: "create"}  do |m| %>
   <%= m.label :content %>
   <%= m.text_area :content, class: 'form-control', autocomplete: "off" %>
   <%= m.submit "Send", class: "btn btn-primary" %>

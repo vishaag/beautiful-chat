@@ -1,0 +1,28 @@
+<% provide(:title, 'Edit Group') %>
+<h1>Edit Group</h1>
+
+<ul class="users">
+  <% @users.each do |user| %>
+    <li>
+      <%= link_to user.name, user_path(user) %>
+      <% if user.groups.ids.empty? %>
+          <%= form_for [@group, GroupUser.new] do |m| %>
+            <%= m.hidden_field(:user_id, value: user.id) %>
+            <%= m.submit "Add", class: "btn btn-primary" %>
+          <% end %>
+      <% end %>
+
+      <% user.groups.each do |group|%>
+        <% if group.id.to_i == params[:id].to_i%>
+          already in group
+        <% else %>
+          <%= form_for [@group, GroupUser.new] do |m| %>
+            <%= m.hidden_field(:user_id, value: user.id) %>
+            <%= m.submit "Add", class: "btn btn-primary" %>
+          <% end %>
+        <%end%>
+      <% end %>
+
+    </li>
+  <% end %>
+</ul>

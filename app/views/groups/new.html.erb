@@ -1,0 +1,20 @@
+<% provide(:title, 'Create Group') %>
+<h1>Create Group</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@group) do |f| %>
+
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+
+    <%= f.label :type, "Open Group", :value => "open" %>
+    <%= f.radio_button :group_type, "open" %>
+
+    <%= f.label :type, "Closed Group", :value => "closed" %>
+    <%= f.radio_button :group_type, "closed" %>
+
+    <%= f.submit "Create Group", class: "btn btn-primary" %>
+  <% end %>
+  </div>
+</div>
