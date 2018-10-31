@@ -1,4 +1,5 @@
 class Groups::MessagesController < ApplicationController
+  before_action :correct_group_user
 
     def index
       @group = Group.find(params[:group_id])
@@ -23,7 +24,18 @@ class Groups::MessagesController < ApplicationController
     
     def message_params
         params.require(:group_message).permit(:content)
+    end
+
+    def correct_group_user
+      @group = Group.find(params[:group_id])
+      user_exists_in_group = false
+      @group.users.each do |g| 
+        if g == current_user
+          user_exists_in_group = true
+        end
       end
+      redirect_to(groups_path) unless user_exists_in_group
+    end      
 
 
 end
