@@ -5,27 +5,18 @@
   <% @users.each do |user| %>
     <li>
       <%= link_to user.name, user_path(user) %>
-      <% if user.groups.ids.empty? %>
-          <%= form_for [@group, GroupUser.new] do |m| %>
-            <%= m.hidden_field(:user_id, value: user.id) %>
-            <%= m.submit "Add", class: "btn btn-primary" %>
-          <% end %>
-      <% end %>
 
-      <% user.groups.each do |group|%>
-        <% if group.id.to_i == @group.id %>
-          <span class="badge badge-success">Already in group</span>
-          <%= link_to '<button type="button" class="btn btn-danger btn-block">Remove</button>'.html_safe, 
+      <% part_of_current_group = user.groups.where(id: @group.id).present? %>
+      <% if part_of_current_group %>
+        <span class="badge badge-success">Already in group</span>
+        <%= link_to '<button type="button" class="btn btn-danger btn-block">Remove</button>'.html_safe, 
           group_group_user_path(@group, GroupUser.where(group_id: @group.id, user_id: user.id).first ), method: :delete, data: { confirm: "Really?" } %>
-
-        <% else %>
-          <%= form_for [@group, GroupUser.new] do |m| %>
-            <%= m.hidden_field(:user_id, value: user.id) %>
-            <%= m.submit "Add", class: "btn btn-primary" %>
-          <% end %>
-        <%end%>
-      <% end %>
-
+      <% else %>
+       <%= form_for [@group, GroupUser.new] do |m| %>
+          <%= m.hidden_field(:user_id, value: user.id) %>
+          <%= m.submit "Add", class: "btn btn-primary" %>
+        <% end %>
+      <%end%>
     </li>
   <% end %>
 </ul>

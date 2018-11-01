@@ -1,5 +1,7 @@
 class GroupsController < ApplicationController
   before_action :load_group, only: [:show, :edit]
+  before_action :authorize_admin, only: [:edit]
+
   def new
     @group = Group.new
   end
@@ -42,4 +44,15 @@ class GroupsController < ApplicationController
       @group = Group.find(params[:id])
     end
 
+    def authorize_admin
+      is_admin = GroupUser.where(
+        group_id: @group.id, user_id: current_user.id,
+        admin: true
+      ).first
+    
+      unless is_admin
+        redirect_to group_messages_path(@group)
+        return
+      end
+    end
 end
