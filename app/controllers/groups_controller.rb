@@ -45,12 +45,9 @@ class GroupsController < ApplicationController
     end
 
     def authorize_admin
-      is_admin = GroupUser.where(
-        group_id: @group.id, user_id: current_user.id,
-        admin: true
-      ).first
+      @is_admin = current_user.is_admin?(@group)
     
-      unless is_admin
+      unless @is_admin
         redirect_to group_messages_path(@group)
         return
       end

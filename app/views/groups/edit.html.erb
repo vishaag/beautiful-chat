@@ -9,6 +9,14 @@
       <% part_of_current_group = user.groups.where(id: @group.id).present? %>
       <% if part_of_current_group %>
         <span class="badge badge-success">Already in group</span>
+        <% admin_of_group = user.is_admin?(@group) %>
+        <% if admin_of_group %>
+          <%= link_to '<button type="button" class="btn btn-danger btn-block">Remove Admin</button>'.html_safe, 
+            group_group_user_path(@group, GroupUser.where(group_id: @group.id, user_id: user.id).first, admin: false ), method: :patch %>
+        <% else %>
+          <%= link_to '<button type="button" class="btn btn-danger btn-block">Make Admin</button>'.html_safe, 
+            group_group_user_path(@group, GroupUser.where(group_id: @group.id, user_id: user.id).first, admin: true ), method: :patch %>
+        <% end %>
         <%= link_to '<button type="button" class="btn btn-danger btn-block">Remove</button>'.html_safe, 
           group_group_user_path(@group, GroupUser.where(group_id: @group.id, user_id: user.id).first ), method: :delete, data: { confirm: "Really?" } %>
       <% else %>
