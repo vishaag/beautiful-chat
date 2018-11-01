@@ -1,5 +1,8 @@
 <% provide(:title, 'All Groups') %>
 <h1>Groups</h1>
+<%= link_to '<i style="display:block ; text-align:center"
+class="glyphicon glyphicon-plus center-align"></i>'.html_safe, new_group_path %>
+
 
 <ul class="users">
   <% @groups.each do |group|  %>

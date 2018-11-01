@@ -1,5 +1,7 @@
 <% provide(:title, 'Group Chat') %>
 <h1> Group Chat </h1>
+<%= link_to '<i style="display:block ; text-align:center"
+class="glyphicon glyphicon-edit center-align"></i>'.html_safe, edit_group_path(params['group_id']) %>
 
 <div>
   <% @old_messages.each do |message| %>

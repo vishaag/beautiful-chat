@@ -1,5 +1,7 @@
 <% provide(:title, 'Group Message') %>
-<h1> Group Chat </h1>
+<h1>
+  <%= "Group Chat #{@group.name}" %>
+</h1>
 
 <ul class="users">
   <% @users.each do |user| %>

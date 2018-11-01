@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  before_action :load_group, only: [:show, :edit]
   def new
     @group = Group.new
   end
@@ -13,7 +14,6 @@ class GroupsController < ApplicationController
 
   def edit
     @users = User.all
-    @group = Group.find(params[:id])
   end
 
   def create
@@ -38,6 +38,8 @@ class GroupsController < ApplicationController
       params.require(:group).permit(:name, :group_type)
     end
 
-
+    def load_group
+      @group = Group.find(params[:id])
+    end
 
 end

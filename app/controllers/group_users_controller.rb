@@ -6,6 +6,11 @@ class GroupUsersController < ApplicationController
         }))
     end
 
+    def destroy
+        GroupUser.where(id: params[:id], group_id: params[:group_id]).first.destroy
+    end
+
+
     private
 
         def group_users_params
